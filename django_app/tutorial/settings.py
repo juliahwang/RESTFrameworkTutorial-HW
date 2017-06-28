@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # snippets 앱추가
     'snippets',
     'rest_framework',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
