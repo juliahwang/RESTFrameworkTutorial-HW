@@ -50,13 +50,17 @@ from snippets.models import LANGUAGE_CHOICES, STYLE_CHOICES, Snippet
 
 
 # 모델 시리얼라이저 정의하기
-class SnippetSerializer(serializers.ModelSerializer):
+class SnippetSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
+    highlight = serializers.HyperlinkedIdentityField(
+        view_name='snippet-highlight',
+        format='html',
+    )
 
     class Meta:
         model = Snippet
         fields = (
-            'id',
+            # 'id', - hyperlink로 관계정의. 필요없음.
             'title',
             'code',
             'linenos',
@@ -64,15 +68,25 @@ class SnippetSerializer(serializers.ModelSerializer):
             'style',
             # owner를 새로 정의해주었으므로 반드시 추가!
             'owner',
+            # Hyperlink 방식의 시리얼라이저에 필드추가, url포함
+            'url',
+            'highlight',
         )
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
     snippets = serializers.PrimaryKeyRelatedField(
         many=True,
         queryset=Snippet.objects.all(),
+        read_only=True,
     )
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'snippets')
+        fields = (
+            # 'id',
+            # id(pk) 대신 url 추가
+            'url',
+            'username',
+            'snippets'
+        )
