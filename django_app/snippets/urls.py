@@ -35,6 +35,7 @@ urlpatterns = [
 
 urlpatterns = format_suffix_patterns(urlpatterns)
 
+# 탐색 가능한 API를 위한 로그인/로그아웃 뷰
 urlpatterns += [url(r'^api-auth/', include('rest_framework.urls',
                                            namespace='rest_framework')),
 ]

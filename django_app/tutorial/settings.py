@@ -28,6 +28,13 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# REST Framework Pagination settings
+# 무조건 딕셔너리 형태로 설정을 전달해야 프로젝트의 다른 설정과 분리 가능하다.
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10,
+}
+
+
 # Application definition
 
 INSTALLED_APPS = [
