@@ -4,9 +4,17 @@ from django.conf.urls import include
 from snippets import views
 
 urlpatterns = [
+    # SnippetHighlight 뷰와 연결
+    url(r'^$', views.api_root),
+    # 코드조각 리스트
     url(r'^snippets/$', views.SnippetList.as_view()),
+    # 코드조각 디테일 페이지
     url(r'^snippets/(?P<pk>[0-9]+)/$', views.SnippetDetail.as_view()),
+    # 하이라이트된 코드조각을 볼 수 있는 페이지
+    url(r'^snippets/(?P<pk>[0-9]+)/highlight/$', views.SnippetHighlight.as_view()),
+    # 유저 리스트
     url(r'^users/$', views.UserList.as_view()),
+    # 유저별 디테일 페이지
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
 ]
 
