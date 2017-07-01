@@ -8,11 +8,12 @@ from snippets.serializers import SnippetSerializer, UserSerializer
 class SnippetList(generics.ListCreateAPIView):
     """
     코드 조각을 모두 보여주거나 새 코드조각을 생성
-    :param request: 해당 url에 대한 요청
-    :return: 코드 조각 리스트 or 생성
     """
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
 class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):

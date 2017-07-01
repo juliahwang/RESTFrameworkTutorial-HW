@@ -51,6 +51,8 @@ from snippets.models import LANGUAGE_CHOICES, STYLE_CHOICES, Snippet
 
 # 모델 시리얼라이저 정의하기
 class SnippetSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         model = Snippet
         fields = (
@@ -60,6 +62,7 @@ class SnippetSerializer(serializers.ModelSerializer):
             'linenos',
             'language',
             'style',
+            'owner',
         )
 
 
