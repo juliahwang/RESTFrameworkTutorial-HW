@@ -62,6 +62,7 @@ class SnippetSerializer(serializers.ModelSerializer):
             'linenos',
             'language',
             'style',
+            # owner를 새로 정의해주었으므로 반드시 추가!
             'owner',
         )
 
