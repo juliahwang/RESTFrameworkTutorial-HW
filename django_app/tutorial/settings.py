@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'snippets',
     'rest_framework',
     'django_extensions',
+    'httpie',
 ]
 
 MIDDLEWARE = [
